@@ -16,7 +16,7 @@ function createWindow() {
 }
 
 ipcMain.handle('get-node-version', async (event) => {
-    return process.version.node
+    return process.versions.node
 })
 
 app.whenReady().then(createWindow)
