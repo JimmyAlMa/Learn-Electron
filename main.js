@@ -21,10 +21,10 @@ ipcMain.handle('get-node-version', async (event) => {
 
 ipcMain.handle('get-system-info', async (event) => {
     return {
-        "node": process.versions.node,
-        "chrome": process.versions.chrome,
-        "version": process.versions.electron,
-        "platfrom": process.versions.platfrom
+        node: process.versions.node,
+        chrome: process.versions.chrome,
+        version: process.versions.electron,
+        platfrom: process.platform
     }
 })
 
