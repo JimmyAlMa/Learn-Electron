@@ -11,12 +11,22 @@ body {
     align-items: center;
     padding: 10px;
 }
-#firstButton {
+hr {
+    border: none;
+    border-top: 2px solid gray;
+    margin: 10px;
+    width: 75%;
+}
+ul {
+    list-style: none;
+    font-weight: bold;
+}
+#firstButton, #secondButton {
     padding: 10px;
     font-size: 1.2rem;
     margin: 10px auto;
 }
-#firstDiv {
+#firstDiv, #secondDiv {
     border: 2px dashed black;
     padding: 10px;
 }
