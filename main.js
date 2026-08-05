@@ -1,5 +1,6 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
+const fs = require('fs')
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -26,6 +27,24 @@ ipcMain.handle('get-system-info', async (event) => {
         version: process.versions.electron,
         platfrom: process.platform
     }
+})
+
+ipcMain.handle('open-file', async () => {
+    const result = await dialog.showOpenDialog({
+        properties: ['openFile'],
+        filters: [{ name: 'Text files', extensions: ['txt', 'json'] }]
+    })
+
+    // If user cancel
+    if (result.canceled || result.filePaths.length === 0) {
+        return { canceled: true }
+    }
+
+    const filePath = result.filePaths[0]
+
+    const dataFile = fs.readFileSync(filePath, 'utf-8')
+
+    return { canceled: false, filePath, content: dataFile }
 })
 
 app.whenReady().then(createWindow)
