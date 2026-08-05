@@ -7,4 +7,5 @@ contextBridge.exposeInMainWorld('api', {
 
 contextBridge.exposeInMainWorld('fileApi', {
     openFile: () => ipcRenderer.invoke('open-file'),
+    saveFile: (text) => ipcRenderer.invoke('save-file', text)
 })
