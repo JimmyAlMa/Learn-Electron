@@ -21,3 +21,30 @@ secondButton.addEventListener('click', async () => {
         secondResult.appendChild(li)
     })
 })
+
+const openFileButton = document.querySelector('#openFile')
+const saveFileButton = document.querySelector('#saveFile')
+const status = document.querySelector('#statusText')
+const textArea = document.querySelector('#textArea')
+
+openFileButton.addEventListener('click', async () => {
+    const response = await window.fileApi.openFile()
+
+    if (!response.canceled) {
+        textArea.value = response.content
+        status.innerText = `Status: Open file: ${response.filePath}`
+    } else {
+        status.innerText = `Status: Open file canceled`
+    }
+})
+
+saveFileButton.addEventListener('click', async () => {
+    const text = textArea.value
+    const response = await window.fileApi.saveFile(text)
+
+    if (!response.success) {
+        status.innerText = `Status: ${response.reason}`
+    } else {
+        status.innerText = `Status: File successfully saved at: ${response.filePath}`
+    }
+})
